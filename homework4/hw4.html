@@ -1,0 +1,186 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        p.para {
+    text-align: center;
+    
+}
+    </style>
+    <script type="text/javascript">
+    var xmlDoc;
+        function loadXML(url){
+        
+        if(window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+            
+        }
+        else{
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+            xmlhttp.open("GET",url,false); //open send response 
+           
+            xmlhttp.send();
+            xmlDoc=xmlhttp.responseXML;
+             if(xmlhttp.status==404) 
+             {
+                 alert("File does not exist"); 
+                 return false;
+             }
+          
+            return xmlDoc;
+        }
+        function getURL(url)
+        {
+          
+        if(url==""){
+            window.alert("Please enter the URL of the XML file in the textbox!");
+            }
+        else{
+                xmlDoc=loadXML(url);
+                if(xmlDoc.documentElement.nodeName=="parsererror"){
+                    alert("Error in xml file\n");
+                    
+            
+                }
+                else if(xmlDoc==false){
+                     return;
+                }
+                    
+                else{
+                  
+                var data=xmlDoc.getElementsByTagName("Header")[0].getElementsByTagName("Data");
+                var row=xmlDoc.getElementsByTagName("Row");
+                    
+                     if(row.length==0){
+                        alert("Empty network list");
+                        return;
+                    }
+                    var xmlWin=window.open("","_blank","height=400,width=800,scrollbars=yes");
+                xmlWin.document.write("<table border='1'><tr>");
+              
+                for(var i=0;i<data.length;i++)
+                {
+                    var header=data[i].childNodes[0].nodeValue;
+                    xmlWin.document.write('<th>'+header+'</th>');
+                    
+                }
+                
+            xmlWin.document.write('</tr>');
+                   
+                for(var j=0;j<row.length;j++)
+                {
+    
+                    xmlWin.document.write('<tr>');
+                        //Network
+                xmlWin.document.write('<td>');
+                
+                if(typeof(row[j].getElementsByTagName("Network")[0].childNodes[0])!= "undefined")
+                { 
+                    var network=row[j].getElementsByTagName("Network")[0].childNodes[0].nodeValue;
+                    network=network.trim();//replace('/^\>\s+\<$/',"");
+                          
+                         if(network!=""){
+
+                             xmlWin.document.write(network);
+                              }
+                            }
+                            xmlWin.document.write('</td>');
+
+                        //Owner
+                           xmlWin.document.write('<td>');
+                        
+                    if(typeof(row[j].getElementsByTagName("Owner")[0].childNodes[0])!= "undefined")
+                            { 
+                        var owner=row[j].getElementsByTagName("Owner")[0].childNodes[0].nodeValue;
+                                 owner=owner.trim();
+                          
+                               if(owner!=""){
+
+                             xmlWin.document.write(owner);
+                              }
+                            }
+                            xmlWin.document.write('</td>');
+                        //Feeds
+                        var feed=row[j].getElementsByTagName("Feed");
+                        var feed_len=feed.length;
+                        xmlWin.document.write('<td><ul>');
+                        for(var cn=0;cn<feed_len;cn++){
+                        if(typeof(feed[cn].childNodes[0])!= "undefined")
+                        { 
+                            var feed_ch=feed[cn].childNodes[0].nodeValue;
+                                feed_ch=feed_ch.trim();
+                            if(feed_ch!=""){
+                                xmlWin.document.write('<li>'+feed_ch+'</li>');
+                            }
+                        }
+                    }
+                         xmlWin.document.write('</ul></td>');
+                        //Notes
+                        xmlWin.document.write('<td>');
+                   
+                    if(typeof(row[j].getElementsByTagName("Notes")[0].childNodes[0])!= "undefined")
+                    { 
+                        var notes=row[j].getElementsByTagName("Notes")[0].childNodes[0].nodeValue;   
+                                 notes=notes.trim();
+                          
+                               if(notes!=""){
+
+                             xmlWin.document.write(notes);
+                              }
+                    }
+                            xmlWin.document.write('</td>');
+                        //HomePage
+                        xmlWin.document.write('<td>');
+                
+                if(typeof(row[j].getElementsByTagName("HomePage")[0].childNodes[0])!= "undefined")
+                { 
+                var homepage=row[j].getElementsByTagName("HomePage")[0].childNodes[0].nodeValue;
+                homepage=homepage.trim();
+                          
+                if(homepage!=""){
+
+               xmlWin.document.write('<a href='+homepage+'>'+homepage+'</a>');
+                 }
+                }
+                        
+                xmlWin.document.write('</td>');
+                        //Logo
+                   
+                    xmlWin.document.write('<td>');
+                    if(typeof(row[j].getElementsByTagName("Logo")[0].childNodes[0])!= "undefined")
+                    { 
+                         var logo=row[j].getElementsByTagName("Logo")[0].childNodes[0].nodeValue;       
+                        logo=logo.trim();
+                          
+                               if(logo!=""){
+
+                                 xmlWin.document.write('<img src='+logo+'>');
+                            }
+                    }
+                        xmlWin.document.write('</td>');     
+                        xmlWin.document.write('</tr>');
+                
+                
+//            xmlhttp.status(
+//            window.open();
+//            document.getElementById("p1").innerHTML()=xmlDoc;
+            }//end of row for
+            }
+        }
+        }
+    </script>
+</head>
+<body>
+<form>
+<p class="para">
+ Enter URL for Company List XML File <br><br>
+ <input type="text" id="txtUrl"> <br><br>
+
+ <input type="button" value="Submit Query" name="btnURL"  onclick="getURL(document.getElementById('txtUrl').value)">
+</p>
+    
+</form>
+    <noscript/>
+</body>
+</html>
