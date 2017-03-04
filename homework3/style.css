@@ -1,0 +1,157 @@
+
+body {
+    
+    background-color: #E2E2E2; 
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+}
+  
+ul.list_ul {
+    position: relative;
+    display: block;
+    list-style-type: none;
+    margin-right: 20px;
+    margin-top: 0px;
+    padding: 0;
+    text-align: right;
+    z-index: 3;
+      
+}
+
+ul.list_ul_horizontal {
+    position: absolute;
+    top: 70px;
+    right: -485px;
+    list-style-type: none;
+    display: inline;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+ul.list_ul_horizontal li {
+    display: inline;
+}
+
+ul.list_ul_horizontal li:before {
+    content: " | "
+}
+
+ul.list_ul_horizontal li:first-child:before {
+    content: none;
+}
+
+ul li a {
+    color: #676477;
+}
+
+#side_top {
+  
+   background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/side_top.png");
+   max-width: 100%;
+    
+}
+
+#header {
+   display: block;
+   
+}
+
+.side_main_c {
+  /*    background-color: white;*/
+    position: absolute;
+    z-index: 1;
+    width: 230px;
+    height: 125px;
+    
+}
+
+#footer_main {
+    display: block;
+    width: 565px;
+    height: 250px;
+}
+
+#side_bottom {
+   position: absolute;
+   top: 172px;
+   width: 230px;
+    
+}
+
+#footer {
+    display: block;
+   
+}
+
+.outer {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    left: 0px;
+    margin: 0px auto;
+}
+
+.col1 {
+    position: relative;
+    height: 258px;
+    width: 230px;
+    left: -5px;
+    top: 10px;
+    
+}
+
+.col2 {
+    position: absolute;
+    display: inline;
+    left: 238px;
+    top: 10px;
+}
+
+#central {
+    background-color: white;
+    display: block;
+    width: 562px;
+    height: 250px;
+    z-index: 1;
+}
+
+
+#sideup {
+    display: block;
+    width: 230px;
+    
+}
+
+ul.menuitems {
+    
+    display: block;
+    list-style-type: none;
+    margin: 20px;
+    padding: 0;    
+    text-align: right;
+    z-index: 3;
+      
+}
+
+.container {
+    position: relative;
+  
+}
+
+.container2 {
+    display: inline;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+#side_main {
+    
+/*    background-color: white;*/
+    position: absolute;
+    z-index: 1;
+    width: 230px;
+    height: 125px;
+    
+}
